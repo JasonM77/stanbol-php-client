@@ -156,10 +156,10 @@ class StanbolEntityhubServiceImpl extends AbstractStanbolService implements Stan
         if (!file_exists($file) || !is_readable($file))
             throw new \InvalidArgumentException('The file ' . $file . ' does not exist or it is not readable');
 
+        $model = file_get_contents($file);
+
         if (FormatHelper::guessFormat($model, $file) != MediaType::APPLICATION_RDF_XML)
             throw new \InvalidArgumentException('The file ' . $file . ' is not a RDF-format file');
-        
-        $model = file_get_contents($file);
 
         return $this->_create($id, $model, $update);
     }
