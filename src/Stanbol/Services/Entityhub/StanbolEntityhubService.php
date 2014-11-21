@@ -72,6 +72,20 @@ interface StanbolEntityhubService
     public function createFromFile($file, $id = null, $update= false);
 
     /**
+     * <p>Creates entities for the EntityHub from a raw XML string. If any of such Entities already exists within the Entityhub and the update parameter
+     * is false, a {@link StanbolServiceException} will be thrown</p>
+     *
+     * @param string $xml The XML string containing entities in RDF format.
+     * @param string $id The URI of the entity. If the URI is null, RDF entities' ids will be used. If the URI is not null, only the
+     * referenced entity will be created or updated
+     * @param boolean $update If true, entities that already exist will be updated. Default is false
+     * @return The URI of the created Entity
+     * @throws InvalidArgumentException
+     * @throws StanbolServiceException
+     */
+    public function createFromRawXml($xml, $id = null, $update= false);
+
+    /**
      * <p>Creates an entity in the EntityHub. If the Entity already exists within the Entityhub and the update parameter
      * is false, a {@link StanbolServiceException} will be thrown</p>
      *
@@ -120,6 +134,20 @@ interface StanbolEntityhubService
      * @throws InvalidArgumentException
      */
     public function updateFromFile($file, $id = null, $create = false);
+
+    /**
+     * <p>Update entities for the EntityHub from XML string. If any of such Entities doesn't exist within the Entityhub and create parameter is
+     * false, a {@link StanbolServiceException} will be thrown</p>
+     *
+     * @param string $xml The XML string containing entities in RDF format.
+     * @param string $id The URI of the entity. If the URI is null, RDF entities' ids will be used. If the URI is not null, only the
+     * referenced entity will be created or updated
+     * @param boolean $create If true and the Entity doesn't exist within the EntityHub, the Entity will be created. Default is true
+     * @return mixed The data of the entity as <code>Entity</code>
+     * @throws StanbolServiceException
+     * @throws InvalidArgumentException
+     */
+    public function updateFromRawXml($xml, $id = null, $create = false);
 
     /**
      * <p>Delete an entity managed by the Entityhub by its URI</p>

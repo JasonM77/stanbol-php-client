@@ -165,6 +165,16 @@ class StanbolEntityhubServiceImpl extends AbstractStanbolService implements Stan
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function createFromRawXml($xml, $id = null, $update = false)
+    {
+        if (!is_string($xml) || $xml == '')
+            throw new \InvalidArgumentException('The supplied xml is invalid');
+        return $this->_create($id, $xml, $update);
+    }
+
+    /**
      * <p>Auxiliar function to create the entity in Stanbol Entityhub</p>
      * 
      * @param string $id The id of the entity to be created
@@ -254,6 +264,16 @@ class StanbolEntityhubServiceImpl extends AbstractStanbolService implements Stan
             throw new \InvalidArgumentException('The file ' . $file . ' is not a RDF-format file');
 
         return $this->_update($id, $model, $create);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateFromRawXml($xml, $id = null, $create = false)
+    {
+        if (!is_string($xml) || $xml == '')
+            throw new \InvalidArgumentException('The supplied xml is invalid');
+        return $this->_update($id, $xml, $create);
     }
 
     /**
