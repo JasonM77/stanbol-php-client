@@ -83,6 +83,17 @@ class Entity
         $this->checkProperty($property, $lang);
         $this->addPropertyValue($property, $value, $lang);
     }
+
+    /**
+     * <p>Removes a property value</p>
+     * <p>All the existing values will be removed</p>
+     *
+     * @param String $property The property to be removed
+     */
+    public function removeProperty($property) {
+        if (isset($this->properties[$property]))
+            unset($this->properties[$property]);
+    }
     
     /**
      * <p>Gets the values of the property</p>
