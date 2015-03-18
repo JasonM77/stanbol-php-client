@@ -45,6 +45,9 @@ class RdfXmlEntitySerialiser implements EntitySerialiser
                 if ($key != 'value')
                     $lang = $key;
                 foreach ($values as $value) {
+                    // Check to see if the value is a string representation of a date
+                    if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\+[0-9]{2}:[0-9]{2}$/', $value))
+                        $resource->addLiteral($propertyName, new \DateTime($value));
                     if (filter_var($value, FILTER_VALIDATE_URL))
                         $resource->addResource($propertyName, $value);
                     else
